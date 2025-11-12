@@ -1,329 +1,421 @@
-# 时间戳相机 (Timestamp Camera) - 说明文档
+# Online Timestamp Camera
 
-## 项目概述
+[![Website](https://img.shields.io/badge/Website-Online%20Timestamp%20Camera-blue)](https://www.timestampcameras.com)
+[![GitHub](https://img.shields.io/badge/GitHub-Repository-blue)](https://github.com/a136332462/TimestampCamera)
+[![Framework](https://img.shields.io/badge/Framework-Next.js-blue)](https://nextjs.org/)
+[![License](https://img.shields.io/badge/License-MIT-blue)](https://opensource.org/licenses/MIT)
 
-这是一个基于 Next.js 和 React 构建的时间戳相机 Web 应用，允许用户为图片添加时间戳、GPS 信息、签名和 Logo 等水印。项目采用 TypeScript 开发，支持多语言国际化，并提供了丰富的自定义选项。
+## Site Overview
 
-🌐 **在线体验**: [https://www.timestampcameras.com](https://www.timestampcameras.com)
+**Online Timestamp Camera** is a free, web-based tool that allows users to add date, time, location, signature, and logo watermarks to photos and videos without requiring any app downloads. Built with Next.js, our platform provides a seamless, browser-based experience for professionals, creators, and individuals who need to document events, create evidence records, or enhance their visual content with precise timestamp information.
 
-### 产品特色
+Our service supports millisecond-precision timestamps, GPS location data, custom text watermarks, and logo overlays, making it ideal for attendance tracking, legal evidence collection, engineering supervision, travel documentation, and creative photography.
 
-- **毫秒级精度**: 支持毫秒级时间戳显示
-- **多层水印系统**: 时间戳、GPS 定位、自定义签名和 Logo
-- **高度自定义**: 64 种时间格式，完全可调整的字体和颜色
-- **多设备体验**: 上传、拍照、二维码扫描、移动端友好、自动保存设置
-- **免费使用**: 提供免费版本，无需注册即可使用
+## Main Sections & Features
 
-## 架构
+### 🏠 [Home](https://www.timestampcameras.com)
+The main landing page showcasing our timestamp camera capabilities, user testimonials, and quick access to core features. Discover how to add customizable watermarks to your photos and videos with real-time preview.
 
+### 📚 [Blogs](https://www.timestampcameras.com/blogs)
+Explore tips, tutorials, and updates on timestamp camera usage, photo watermarking techniques, and image processing best practices. Our blog covers everything from basic usage guides to advanced customization strategies.
 
-## 详解
+### 💰 [Pricing](https://www.timestampcameras.com/pricing)
+View our flexible subscription plans and credit packages. Every new user receives free credits to get started. Choose between monthly or annual subscriptions, or purchase one-time credit packs that never expire.
 
-### 1. (index.tsx)
+### ⚙️ [Batch Watermark](https://www.timestampcameras.com/batch-watermark)
+Process multiple images simultaneously with our professional batch watermark tool. Upload hundreds of images at once, apply unified watermark settings, and download processed files individually or as ZIP packages.
 
-**功能**: 整个应用的主入口组件，负责状态管理和组件协调
+### ❓ [FAQ](https://www.timestampcameras.com/#faq)
+Find answers to common questions about timestamp accuracy, offline usage, supported file formats, watermark customization, privacy protection, and troubleshooting tips.
 
-**主要特性**:
-- 统一状态管理（图片、水印文本、时间格式、GPS 信息等）
-- 动态组件导入优化性能
-- 图片下载功能
-- 水印位置计算和自定义定位
+## Core Components & Features
 
-**核心状态**:
-```typescript
-interface HomeState {
-  image: string | null;
-  watermarkText: string;
-  timeFormat: string;
-  address: string;
-  fontStyle: FontStyle;
-  position: string;
-  gps: GPSInfoValue;
-  rotate: number;
-  fileName: string;
-  signature: string;
-  logo: string | null;
-  vertical: boolean;
-  watermarkVisible: boolean;
-  watermarkPositions: WatermarkPositions;
+### Main Function Section
+The primary workspace with a two-panel layout:
+
+**Left Panel - Settings & Configuration:**
+- File upload interface with drag-and-drop support
+- Watermark visibility toggles for all watermark types
+- Time watermark settings with 123+ format options
+- Font style configuration (17 fonts, color, size, opacity)
+- Watermark position selector (8 preset positions + custom)
+- Image rotation controls (0-359° with 45° increments)
+- Custom signature/text input (multi-line support)
+- GPS location settings (auto/manual coordinates, altitude, speed)
+- Logo upload and positioning
+- Custom download filename configuration
+
+**Right Panel - Real-Time Preview:**
+- Live watermark preview with instant updates
+- Interactive drag-and-drop watermark positioning
+- Canvas-based rendering for accurate preview
+- Download button with format selection
+
+### Image Preview Area
+Core component for watermark rendering and visualization:
+
+**Key Features:**
+- Real-time watermark preview with instant updates
+- Drag-and-drop positioning for all watermark types
+- 8 preset alignment positions (top-left, top-center, top-right, bottom-left, bottom-center, bottom-right, center, custom)
+- Vertical text display support
+- Individual watermark visibility controls
+- Image rotation effects (0-359°)
+- Touch-friendly mobile interactions
+- Canvas-based high-quality rendering
+
+**Supported Watermark Types:**
+- Timestamp watermark (123+ formats, millisecond precision)
+- Address/GPS information watermark
+- Custom signature/text watermark (multi-line)
+- Logo watermark (PNG, JPG, WEBP)
+- GPS coordinates watermark (latitude, longitude, altitude, speed)
+
+### File Upload Component
+Comprehensive file handling with multiple upload methods:
+
+**Upload Methods:**
+- Local file upload (click to select)
+- Drag-and-drop upload (global support)
+- Camera capture (mobile devices)
+- QR code scanning (remote upload from mobile)
+- File size limit: 20MB per file
+- Supported formats: JPG, PNG, GIF, WebP, BMP, HEIC
+
+**Features:**
+- Real-time upload progress
+- File validation and error handling
+- Mobile-optimized interface
+- Global drag-and-drop overlay
+- QR code generation for mobile upload
+
+### Time Watermark Component
+Advanced time formatting with extensive customization:
+
+**Time Format Support (123+ formats):**
+- Standard formats: `YYYY-MM-DD HH:mm:ss`
+- Millisecond precision: `YYYY-MM-DD HH:mm:ss.SSS`
+- 12-hour format: `YYYY-MM-DD hh:mm:ss A`
+- Chinese format: `YYYY年MM月DD日 HH:mm:ss`
+- File-friendly: `YYYYMMDD_HHmmssSSS`
+- ISO format: `YYYY-MM-DDTHH:mm:ss.SSSZ`
+- Custom format builder with live preview
+
+**Features:**
+- Real-time time preview
+- Auto-update mode (100ms refresh rate)
+- Manual time input
+- Current time sync button
+- Format template library
+- Millisecond-level precision
+
+### Font Style Settings Component
+Complete typography control for all watermarks:
+
+**Font Options (17 fonts):**
+- Sans-serif: Arial, Noto Sans, Open Sans, Lato, Montserrat, Source Sans Pro, Inter, PT Sans, IBM Plex Sans, Roboto
+- Serif: Times New Roman
+- Monospace: Courier New
+- Chinese: Microsoft YaHei, SimSun, SimHei, KaiTi, FangSong
+
+**Style Controls:**
+- Color picker (full spectrum)
+- Font size: 10-64px (adjustable)
+- Opacity: 0-100% (slider control)
+- Text direction: Horizontal/Vertical toggle
+- Real-time preview updates
+
+### GPS & Location Component
+Comprehensive location data management:
+
+**Features:**
+- Automatic GPS positioning (browser geolocation API)
+- Manual coordinate input (latitude, longitude)
+- Altitude information (meters)
+- Speed information (m/s)
+- Address reverse geocoding
+- Manual address input
+- Location permission handling
+- Error state management
+
+**GPS Information Display:**
+- Latitude (decimal degrees)
+- Longitude (decimal degrees)
+- Altitude (meters)
+- Speed (meters per second)
+- Full address (reverse geocoded or manual)
+
+### Watermark Position Selector
+Intuitive positioning system:
+
+**Preset Positions (8 options):**
+- Top-left
+- Top-center
+- Top-right
+- Bottom-left
+- Bottom-center
+- Bottom-right
+- Center
+- Custom (drag-and-drop mode)
+
+**Features:**
+- One-click position application
+- Visual position indicators
+- Custom drag mode for precise placement
+- Real-time position preview
+
+### Image Rotation Component
+Flexible image orientation control:
+
+**Features:**
+- Rotation angle: 0-359° (manual input)
+- Quick rotation: 45° increments (button)
+- Reset to 0° function
+- Real-time rotation preview
+- Maintains image quality during rotation
+
+### Custom Watermark Input
+Multi-line text watermark support:
+
+**Features:**
+- Multiple custom text watermarks
+- Individual visibility controls per watermark
+- Add/remove watermark inputs
+- Real-time preview
+- Multi-language support
+- Drag-and-drop positioning for each watermark
+
+### Logo Uploader Component
+Professional logo watermark management:
+
+**Features:**
+- Logo upload (PNG, JPG, JPEG, WEBP)
+- File size limit: 1MB
+- Dimension limit: 1024x1024 pixels
+- Logo preview with hover effects
+- Visibility toggle
+- Automatic dimension validation
+- Error handling for invalid files
+
+### Download Filename Component
+Custom file naming system:
+
+**Features:**
+- Custom filename input (max 20 characters)
+- Character counter
+- Real-time validation
+- Format preservation
+- Extension handling
+
+### Advanced Settings Panel
+Premium features for power users:
+
+**Included Components:**
+- Advanced font style settings (shadow, stroke, reflection effects)
+- Logo upload and positioning
+- Image rotation controls
+- Custom watermark inputs
+- Download filename customization
+
+## Content Planning & Keyword Strategy
+
+### Core Keywords
+- Timestamp Camera
+- Online Timestamp Camera
+- Add Date to Photo
+- Time Watermark
+- Location Watermark
+- Photo Watermark
+- Signature Watermark
+- Custom Watermark
+- Watermark Camera
+- Image Watermark Online
+
+### Long-Tail Keywords (15+)
+1. Free online tool to add timestamps to images
+2. How to add date and time watermark to photos
+3. Best timestamp camera for attendance tracking
+4. Online photo timestamp generator with GPS
+5. Video timestamp editor without software download
+6. Customize timestamp format on photos online
+7. Add location and timestamp to pictures free
+8. Timestamp camera for legal evidence collection
+9. Real-time timestamp preview tool browser-based
+10. No-installation timestamp software web app
+11. Web-based timestamp application for photos
+12. Secure online photo timestamping tool
+13. High-quality timestamp for videos online
+14. User-friendly timestamp editor with drag-drop
+15. Cross-platform timestamp camera web version
+16. Batch watermark processing for multiple images
+17. Millisecond precision timestamp camera online
+18. GPS location watermark tool free
+
+### Search Intent Layers
+
+**Informational Intent:**
+- "How to add timestamps to photos online"
+- "What is a timestamp camera and how does it work"
+- "Benefits of adding location watermarks to images"
+- "Best practices for timestamp photo documentation"
+
+**Navigational Intent:**
+- "Online Timestamp Camera website"
+- "Timestamp Camera app features"
+- "Timestamp Camera free online tool"
+
+**Transactional Intent:**
+- "Subscribe to Online Timestamp Camera premium"
+- "Buy timestamping tool for videos"
+- "Free timestamp camera with watermark features"
+
+### Topic Clusters
+
+**Cluster 1: Core Timestamp Features**
+- **Core Page**: [Home - Timestamp Camera](https://www.timestampcameras.com)
+- **Supporting Pages**:
+  - [Blogs - Timestamp Guide](https://www.timestampcameras.com/blogs)
+  - [FAQ](https://www.timestampcameras.com/#faq)
+- **Internal Linking Strategy**:
+  - Link from Home to Blogs for detailed tutorials
+  - Link from FAQ to Home for feature overview
+  - Cross-link between Blogs and FAQ for comprehensive coverage
+
+**Cluster 2: Batch Processing & Advanced Features**
+- **Core Page**: [Batch Watermark](https://www.timestampcameras.com/batch-watermark)
+- **Supporting Pages**:
+  - [Pricing](https://www.timestampcameras.com/pricing)
+  - [Blogs - Batch Processing Guide](https://www.timestampcameras.com/blogs)
+- **Internal Linking Strategy**:
+  - Link from Batch Watermark to Pricing for subscription benefits
+  - Link from Pricing to Batch Watermark to showcase value
+  - Reference Blogs from both pages for use cases
+
+## Website Experience & Performance Optimization
+
+Our platform is optimized for speed, security, and mobile responsiveness:
+
+- **Performance**: Built with Next.js 15 for server-side rendering and optimal Core Web Vitals
+- **Security**: All image processing happens locally in the browser; no files are uploaded to servers by default
+- **Mobile Optimization**: Fully responsive design with touch-friendly controls and mobile camera integration
+- **Accessibility**: WCAG-compliant interface with keyboard navigation and screen reader support
+- **SEO**: Server-side rendering with proper meta tags, structured data, and semantic HTML
+
+### Simplified JSON-LD Example
+
+```json
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "Online Timestamp Camera",
+  "url": "https://www.timestampcameras.com",
+  "description": "Free online tool to add date, time, location, signature, and logo watermarks to photos and videos",
+  "publisher": {
+    "@type": "Organization",
+    "name": "Timestamp Camera",
+    "url": "https://www.timestampcameras.com",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://www.timestampcameras.com/logo.png"
+    }
+  },
+  "potentialAction": {
+    "@type": "SearchAction",
+    "target": "https://www.timestampcameras.com/blogs?q={search_term_string}",
+    "query-input": "required name=search_term_string"
+  }
 }
 ```
 
-### 2. MainFunctionSection.tsx
+## Internationalization SEO (i18n Strategy)
 
-**功能**: 主要功能操作区域，包含所有设置选项和预览
+We support three language versions to serve a global audience:
 
-**布局结构**:
-- **左侧**: 功能设置面板
-  - 文件上传
-  - 水印可见性切换
-  - 时间水印设置
-  - 字体样式设置
-  - 水印位置选择
-  - 图片旋转
-  - 签名输入
-  - GPS 信息
-  - Logo 上传
-  - 下载文件名设置
-- **右侧**: 实时预览区域
-  - 图片预览
-  - 水印效果展示
-  - 下载按钮
+- **English**: Default version at root URL
+- **Chinese (Simplified)**: `/zh` path
+- **Japanese**: `/ja` path
 
-### 3. ImagePreviewArea.tsx
+### Hreflang Implementation
 
-**功能**: 图片预览和水印渲染的核心组件
-
-**主要特性**:
-- 实时水印预览
-- 支持拖拽自定义水印位置
-- 多种预设位置（左上、右上、居中、左下、右下等）
-- 支持垂直文本显示
-- 水印可见性控制
-- 图片旋转效果
-
-**水印类型**:
-- 时间戳水印
-- 地址信息水印
-- 签名水印
-- Logo 水印
-- GPS 信息水印
-
-### 4. FileUpload.tsx
-
-**功能**: 文件上传和相机拍照功能
-
-**支持功能**:
-- 本地文件上传（支持拖拽）
-- 相机拍照
-- 远程上传（二维码扫描）
-- 文件大小限制（20MB）
-- 多种文件格式支持
-- 移动端优化
-
-**技术特性**:
-- 使用 `navigator.mediaDevices.getUserMedia` 实现相机功能
-- Canvas 截图处理
-- 文件类型验证
-- 上传状态管理
-
-### 5. TimeWatermark.tsx
-
-**功能**: 时间水印设置和格式化
-
-**时间格式支持**:
-- 标准格式：`YYYY-MM-DD HH:mm:ss`
-- 毫秒格式：`YYYY-MM-DD HH:mm:ss.SSS`
-- 12小时制：`YYYY-MM-DD hh:mm:ss A`
-- 中文格式：`YYYY年MM月DD日 HH:mm:ss`
-- 文件友好格式：`YYYYMMDD_HHmmssSSS`
-- ISO 格式：`YYYY-MM-DDTHH:mm:ss.SSSZ`
-
-**功能特性**:
-- 实时时间预览
-- 自动更新时间
-- 自定义时间格式
-- 地址信息添加
-
-### 6. FontStyleSettings.tsx
-
-**功能**: 字体样式和显示效果设置
-
-**可配置选项**:
-- **字体选择**: Arial、Noto Sans、微软雅黑等 13 种字体
-- **颜色选择**: 支持任意颜色选择
-- **字体大小**: 10-64px 可调
-- **透明度**: 0-100% 可调
-- **文本方向**: 水平/垂直显示切换
-
-### 7. GPSInfo.tsx
-
-**功能**: GPS 地理位置信息设置
-
-**特性**:
-- 自动定位功能
-- 手动输入坐标
-- 支持海拔和速度信息
-- 定位权限处理
-- 错误状态管理
-
-**GPS 信息包含**:
-- 纬度 (Latitude)
-- 经度 (Longitude)
-- 海拔 (Altitude)
-- 速度 (Speed)
-
-### 8. HeroSection.tsx
-
-**功能**: 首页英雄区域，展示产品核心价值
-
-**设计特性**:
-- 动态渐变背景
-- 3D 星空效果
-- 响应式设计
-- 动画交互效果
-- 多语言支持
-
-### 9. 辅助组件
-
-#### WatermarkPositionSelector.tsx
-- 水印位置预设选择
-- 支持 9 种预设位置
-- 自定义位置模式
-
-#### FileRotate.tsx
-- 图片旋转控制
-- 90° 增量旋转
-- 实时预览效果
-
-#### SignatureInput.tsx
-- 签名文本输入
-- 实时预览
-- 多语言支持
-
-#### LogoUploader.tsx
-- Logo 图片上传
-- 预览功能
-- 文件验证
-
-#### DownloadFileName.tsx
-- 下载文件名设置
-- 自定义命名规则
-- 文件扩展名处理
-
-## 技术栈
-
-### 前端框架
-- **Next.js 14**: React 全栈框架
-- **React 18**: 用户界面库
-- **TypeScript**: 类型安全
-
-### UI 组件库
-- **shadcn/ui**: 现代化 UI 组件
-- **Tailwind CSS**: 原子化 CSS 框架
-- **Framer Motion**: 动画库
-
-### 功能库
-- **next-intl**: 国际化支持
-- **qrcode.react**: 二维码生成
-- **uuid**: 唯一标识符生成
-
-### 开发工具
-- **ESLint**: 代码质量检查
-- **Prettier**: 代码格式化
-- **TypeScript**: 类型检查
-
-## 国际化支持
-
-项目支持多语言，目前包含：
-- 中文 (zh)
-- 英文 (en)
-- 日文 (ja)
-
-翻译文件位于 `i18n/messages/` 目录下，按语言和功能模块组织。
-
-## 性能优化
-
-### 代码分割
-- 使用 `dynamic` 导入非首屏组件
-- 按需加载功能模块
-
-### 状态管理
-- 使用 `useMemo` 优化计算属性
-- 使用 `useCallback` 优化事件处理
-- 合理使用 `useRef` 避免重复渲染
-
-### 图片处理
-- Canvas 优化图片处理
-- 文件大小限制
-- 压缩和格式转换
-
-## 浏览器兼容性
-
-### 支持的功能
-- 现代浏览器 (Chrome, Firefox, Safari, Edge)
-- 移动端浏览器
-- PWA 支持
-
-### 特性检测
-- GPS 定位功能
-- 相机 API 支持
-- 文件上传 API
-- Canvas 支持
-
-## 在线体验
-
-🎯 **立即体验**: [https://www.timestampcameras.com](https://www.timestampcameras.com)
-
-### 主要功能演示
-
-根据 [Timestamp Camera 官网](https://www.timestampcameras.com) 展示的功能，该应用提供：
-
-- **文件上传**: 支持图片/视频文件上传、拖拽、二维码扫描上传
-- **相机拍照/录像**: 支持摄像头拍照/录像，自动保存设置
-- **水印可见性切换**: 动态切换水印显示/隐藏
-- **时间地址水印**: 支持 64 种时间格式，地址可以是位置、建筑名称等任意文本
-- **字体样式设置**: 自定义字体、颜色、大小、不透明度、垂直或水平显示模式
-- **水印位置选择**: 支持 7 个预设位置和自定义拖拽定位
-- **文件旋转**: 支持图片/视频文件旋转，垂直和水平显示
-- **签名/标签输入**: 添加签名、标签、项目名称等到照片
-- **地理位置和 GPS 信息**: 自动获取位置信息，支持 GPS 坐标、海拔、速度等作为叠加层
-- **Logo 上传**: 上传自定义图标作为水印（Logo/印章等）
-- **自定义下载文件名**: 自定义下载文件名（时间/标签/位置/序列号）
-
-## 部署说明
-
-### 环境要求
-- Node.js 18+
-- pnpm 包管理器
-- 支持的环境变量配置
-
-### 构建命令
-```bash
-# 安装依赖
-pnpm install
-
-# 开发环境
-pnpm dev
-
-# 生产构建
-pnpm build
-
-# 启动生产服务
-pnpm start
+```html
+<link rel="alternate" hreflang="zh-CN" href="https://www.timestampcameras.com/zh">
+<link rel="alternate" hreflang="en" href="https://www.timestampcameras.com">
+<link rel="alternate" hreflang="ja" href="https://www.timestampcameras.com/ja">
+<link rel="alternate" hreflang="x-default" href="https://www.timestampcameras.com">
 ```
 
-## 贡献指南
+Each language version has:
+- Localized content and metadata
+- Language-specific keywords
+- Culturally appropriate examples and use cases
+- Proper hreflang tags for search engine understanding
 
-### 开发规范
-- 使用 TypeScript 编写代码
-- 遵循 ESLint 规则
-- 组件使用函数式组件和 Hooks
-- 支持国际化
+## E-E-A-T & Backlinks
 
-### 代码结构
-- 组件按功能模块组织
-- 使用 TypeScript 接口定义类型
-- 统一的错误处理机制
-- 完善的注释文档
+**Expertise**: Our platform is built by developers with extensive experience in image processing, web technologies, and user experience design.
 
-## 许可证
+**Experience**: We continuously improve based on user feedback and real-world usage scenarios from professionals in legal, engineering, photography, and documentation fields.
 
-本项目采用 MIT 许可证，详见 LICENSE 文件。
+**Authoritativeness**: Our content is regularly updated with accurate information, technical documentation, and best practices for timestamp photography.
+
+**Trustworthiness**: 
+- Transparent privacy policy and terms of service
+- Secure, local processing (no server uploads by default)
+- Open-source codebase available on GitHub
+- Active community engagement and support
+
+**Backlink Strategy**: We engage in partnerships with photography communities, legal documentation services, and productivity tool directories to build quality backlinks.
+
+## Updates & Maintenance
+
+We regularly update the platform with new features, performance improvements, and bug fixes. Recent updates include:
+
+- Enhanced batch processing capabilities
+- Improved GPS location accuracy
+- Expanded file format support
+- Mobile camera integration
+- Real-time preview optimizations
+
+For detailed changelog and feature announcements, visit our [Blogs](https://www.timestampcameras.com/blogs) section.
+
+## 🔗 Quick Links with Icons
+
+- 🏠 [Home](https://www.timestampcameras.com) - Main landing page
+- 📚 [Blogs](https://www.timestampcameras.com/blogs) - Tips, tutorials, and updates
+- 💰 [Pricing](https://www.timestampcameras.com/pricing) - Subscription plans and credits
+- ⚙️ [Batch Watermark](https://www.timestampcameras.com/batch-watermark) - Batch image processing
+- ❓ [FAQ](https://www.timestampcameras.com/#faq) - Frequently asked questions
+- 🔒 [Privacy Policy](https://www.timestampcameras.com/privacy-policy) - Privacy and data protection
+- 📋 [Terms of Service](https://www.timestampcameras.com/terms-of-service) - Terms and conditions
+
+## 💖 Support Project
+
+[![Buy Me A Coffee](https://img.shields.io/badge/Buy%20Me%20A%20Coffee-Support%20Us-orange)](https://buymeacoffee.com/quinn_sw)
+
+Your support helps us:
+- Maintain and improve the platform
+- Add new features and capabilities
+- Provide faster processing speeds
+- Support the open-source community
+- Keep the service free for basic users
+
+Thank you for supporting Online Timestamp Camera!
+
+## 📞 Contact & Community
+
+- 🌐 [Website](https://www.timestampcameras.com) - Main site
+- 📧 [Email Support](mailto:timestampcamera@timestampcameras.com) - Contact us directly
+- 🐛 [GitHub Issues](https://github.com/a136332462/TimestampCamera/issues) - Report bugs and request features
+- 💬 Discord: Coming Soon - Join our community
+
+## 🏷️ Keywords & SEO
+
+**Primary Keywords:**
+Timestamp Camera, Online Timestamp Camera, Add Date to Photo, Time Watermark, Location Watermark, Photo Watermark, Signature Watermark, Custom Watermark, Watermark Camera, Image Watermark Online, Timestamp Photo, Watermark Timestamp, Timestamp Camera Free, Batch Watermark Tool, GPS Watermark Tool
+
+**Long-Tail Keywords:**
+Free online tool to add timestamps to images, How to add date and time watermark to photos, Best timestamp camera for attendance tracking, Online photo timestamp generator with GPS, Video timestamp editor without software download, Customize timestamp format on photos online, Add location and timestamp to pictures free, Timestamp camera for legal evidence collection, Real-time timestamp preview tool browser-based, No-installation timestamp software web app, Web-based timestamp application for photos, Secure online photo timestamping tool, High-quality timestamp for videos online, User-friendly timestamp editor with drag-drop, Cross-platform timestamp camera web version, Batch watermark processing for multiple images, Millisecond precision timestamp camera online, GPS location watermark tool free
 
 ---
 
-## 相关链接
-
-- 🌐 **官方网站**: [https://www.timestampcameras.com/](https://www.timestampcameras.com/)
-- 📖 **产品博客**: [https://www.timestampcameras.com/blogs](https://www.timestampcameras.com/blogs)
-
-## 支持的语言
-
-- 🇺🇸 English
-- 🇨🇳 中文
-- 🇯🇵 日本語
-
----
-
-*本文档详细介绍了时间戳相机应用的 Home 组件模块，包括组件架构、功能特性、技术实现和使用说明。如有疑问或需要补充，请联系开发团队。*
+**License**: Content follows CC BY-SA 4.0; Code follows MIT License.
